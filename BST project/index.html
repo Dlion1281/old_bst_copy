@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BST project</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="panelVisualChanges.js"></script>
+    <script defer src="canvasBST.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel">
+        <header id="title-bar">
+          <h1>Binary Search Tree</h1>
+        </header>
+
+        <div class="field-separator">Main Options</div>
+
+        <section class="section-control-panel">
+          <div id="panel-main-operation">
+            Operation type
+
+            <div class="dropdown">
+              <div class="select">
+                <span class="selected">Insert</span>
+                <div class="caret"></div>
+              </div>
+              <ul class="menu">
+                <li class="active-menu" id="insert-option">Insert</li>
+                <li id="remove-option">Remove</li>
+                <li id="search-option">Search</li>
+                <li id="traverse-option">Traverse</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <div class="field-separator">Option Fields</div>
+
+        <section class="section-control-panel active-panel option-field" id="insert-panel">
+          <div class="inputBox-section">
+            <input type="text" required="required" />
+            <span>Enter a single value</span>
+          </div>
+
+          <div class="checkBox-row">
+            <label>
+              <input
+                type="checkbox"
+                checked="checked"
+                id="checkbox-button"
+              />
+              <span></span>
+            </label>
+            <p>Insert multiple data</p>
+          </div>
+        </section>
+
+        <section class="section-control-panel hidden option-field" id="traverse-panel">
+          <div id="traverse-container">
+            <div class="option-div" id="inorder">Inorder (ascending)</div>
+            <div class="option-div" id="preorder">Preorder</div>
+            <div class="option-div" id="postorder">Postorder</div>
+            <div class="option-div" id="levelorder">Level-order</div>
+          </div>
+
+          <div id="inorder-container" class="traverse-img hidden">
+            <img src="inorder.svg" alt="">
+            <h3>Arranges in increasing sequence</h3>
+          </div>
+
+
+        </section>
+
+
+        <div class="field-separator">Output</div>
+        <section class="section-control-panel">
+          <div id="output-field">
+            
+          </div>
+        </section>
+
+      </div> 
+      
+      <canvas id="canvas"></canvas>
+    </div>
+  </body>
+</html>
+
+
+<!-- 
+
+  There would be an additional space for nodes if I would'nt care for horizontal alignment
+  Node of the same level do not need to line on the same line as the hierachy is defined 
+  by they connection with an ancestor and not by its vertical position, but it's a challenge
+
+ -->
+
+ <!-- 
+
+  I do not need to specify the active class as everythink is displayed block by default.
+  So I think I should toggle only the hidden class
+
+    But i am using "active" not for displaying but for query selector
+  -->

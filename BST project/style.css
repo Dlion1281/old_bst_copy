@@ -1,0 +1,299 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* I want the container to inherit the height of the body*/
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  color: #e4e8ed;
+}
+
+/* I don't put padding to the control-panel because it would introduce some 
+visual intentations around different background color of child items */
+.control-panel {
+  width: 25%; /* Adjust the width as needed */
+  background-color: #16161d; /* Optional: Set background color */
+}
+
+header {
+  text-align: center;
+  background-color: #5c2b8c;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 20px;
+}
+
+#canvas {
+  /* I want the canvas to occupy the whole remaining space */
+  flex-grow: 1;
+  background-color: #3d3d3d;
+}
+
+.field-separator {
+  /* box-sizing: content-box; */
+  /* padding: 20px 20px 0 20px; */
+  color: #797c80;
+  font-size: 0.9em;
+  border-bottom: 2px dotted #797c80;
+  /* background-color: green; */
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/*
+.field-separator::before,
+.field-separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px dotted #797c80; 
+}
+
+.field-separator::before {
+  margin-right: 10px; 
+}
+.field-separator::after {
+  margin-left: 10px;
+}
+*/
+
+.section-control-panel {
+  padding: 20px 20px 0 20px;
+}
+
+#panel-main-operation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown {
+  min-width: 6.5em;
+  position: relative;
+  /* padding: 5px; */
+}
+.select {
+  background: #29293d;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1px 10px;
+  cursor: pointer;
+}
+
+.select:hover {
+  background: #33334d;
+}
+
+.caret {
+  width: 0px;
+  height: 0px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #fff;
+  transition: 0.3s;
+}
+
+.caret-rotate {
+  transform: rotate(180deg);
+}
+
+.menu {
+  list-style: none;
+  background: #3b3b45;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 1.5em;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;   
+  z-index: 1; 
+  transition: 0.3s;
+}
+
+.menu-open {
+  display: block;
+  opacity: 1;
+  top: 2.5em;
+  pointer-events: auto;
+}
+
+
+.menu li {
+  padding: 1px 10px;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  background: #484857;
+}
+
+.active-menu {
+  background: #29293d;
+}
+
+.inputBox-section {
+  position: relative;
+}
+
+.inputBox-section input {
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 4px;
+  font-size: 1em;
+  border: none;
+  background: #16161d;
+  border: 2px solid #29293d;
+  color: rgb(255, 255, 255, 0.65);
+  outline: none;
+}
+
+/* pointer-events: none; is crucial in scenarios where you want to ensure that a click event is received by an underlying sibling element, especially when one element is positioned on top of another and would otherwise block the event.
+
+In such cases, relying solely on event bubbling wouldn't suffice because event bubbling primarily affects ancestors (parent, grandparent, etc.) of the target element, not its siblings */
+
+.text-fading {
+  font-size: 0px;
+  
+}
+.inputBox-section span {
+  position: absolute;
+  left: 0;
+  padding: 12px 10px;
+  font-size: 1em;
+  color: rgb(255, 255, 255, 0.7);
+  transition: 0.3s; 
+
+  pointer-events: none;
+  letter-spacing: normal; 
+}
+
+.inputBox-section span.squeeze {
+  letter-spacing: -0.01em; /* Squeezed letter spacing */
+  
+}
+
+.inputBox-section input:focus ~ span,
+.inputBox-section input:valid ~ span {
+  color: #7272a8;
+  transform: translateX(10px) translateY(-10px);
+  font-size: 0.85em;
+  background-color: #16161d;
+  padding: 0px 10px;
+}
+
+.checkBox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  color: rgb(255, 255, 255, 0.7);
+}
+
+/* label is the container to which the input and the span will be alligned */
+.checkBox-row label {
+  position: relative;
+  width: 15px;
+  height: 15px;
+}
+
+/* input is the checkbox */
+/* and it reacts on click events */
+.checkBox-row input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0; /* hide check box (input has the type of checkbox). */
+}
+
+.checkBox-row label span {
+  /* allows to "have dimensions" i.e using width and height*/
+  display: block;
+  border: 1px solid #5c2b8c;
+  width: 100%; /* width: 100% means "take the full width of the parent". It's not about the remaining space */
+  height: 100%;
+  /* border: 1px solid #fff; */
+  /* border-radius: 3px; */
+  cursor: pointer;
+  position: absolute; /* position absolute has to be applied to move the span onto the label. Otherwise the span will be moved to the next line because of space deficiency (position: absolute takes elements "out of normal flow" of the document ). */
+}
+
+/* the pseudo element is hidden, not the input type = checkbox */
+.checkBox-row label span::after {
+  content: "";
+  position: absolute;
+
+  left: 3px;
+  bottom: 2px;
+
+  width: 4px;
+  height: 9px;
+
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(40deg);
+  transition: 0.35s;
+  opacity: 0;
+}
+
+.checkBox-row input:checked ~ span::after {
+  width: 5px;
+  height: 10px;
+  /* background: #5c2b8c; */
+  opacity: 1;
+}
+
+#output-field {
+  height: 100px;
+  /* background: #2c2c3a; */
+  color: #27cf49;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.option-div {
+  background-color: #29293d;
+  padding: 5px;
+}
+
+.option-div:not(:first-child) {
+  margin-top: 15px;
+}
+
+.option-div:hover {
+  background-color: #33334d;
+  cursor: pointer;
+}
+
+.traverse-img {
+  width: 100%;
+  text-align: center;
+}
+.traverse-img img {
+  width: 75%;
+}
+
+h3 {
+  margin-top: 15px;
+}
